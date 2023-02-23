@@ -1,191 +1,222 @@
-\documentclass[a4paper,12pt]{article}
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
 
-%----------------------------------------------------------------------------------------
-%	FONT
-%----------------------------------------------------------------------------------------
+\documentclass[letterpaper,11pt]{article}
 
-% % fontspec allows you to use TTF/OTF fonts directly
-% \usepackage{fontspec}
-% \defaultfontfeatures{Ligatures=TeX}
-
-% % modified for ShareLaTeX use
-% \setmainfont[
-% SmallCapsFont = Fontin-SmallCaps.otf,
-% BoldFont = Fontin-Bold.otf,
-% ItalicFont = Fontin-Italic.otf
-% ]
-% {Fontin.otf}
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES
-%----------------------------------------------------------------------------------------
-\usepackage{url}
-\usepackage{parskip} 	
-
-%other packages for formatting
-\RequirePackage{color}
-\RequirePackage{graphicx}
-\usepackage[usenames,dvipsnames]{xcolor}
-\usepackage[scale=0.9]{geometry}
-
-%tabularx environment
-\usepackage{tabularx}
-
-%for lists within experience section
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
 \usepackage{enumitem}
-
-% centered version of 'X' col. type
-\newcolumntype{C}{>{\centering\arraybackslash}X} 
-
-%to prevent spillover of tabular into next pages
-\usepackage{supertabular}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
 \usepackage{tabularx}
-\newlength{\fullcollw}
-\setlength{\fullcollw}{0.47\textwidth}
-
-%custom \section
-\usepackage{titlesec}				
-\usepackage{multicol}
-\usepackage{multirow}
-
-%CV Sections inspired by: 
-%http://stefano.italians.nl/archives/26
-\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
-\titlespacing{\section}{0pt}{10pt}{10pt}
-
-%for publications
-\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
-
-%Setup hyperref package, and colours for links
-\usepackage[unicode, draft=false]{hyperref}
-\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
-\addbibresource{citations.bib}
-\setlength\bibitemsep{1em}
-
-%for social icons
 \usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
 
-%debug page outer frames
-%\usepackage{showframe}
 
-%----------------------------------------------------------------------------------------
-%	BEGIN DOCUMENT
-%----------------------------------------------------------------------------------------
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+
+% serif
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-.7in}
+\addtolength{\textheight}{1.4in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\classesList}[4]{
+    \item\small{
+        {#1 #2 #3 #4 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \begin{document}
 
-% non-numbered pages
-\pagestyle{empty} 
+%----------HEADING----------
 
-%----------------------------------------------------------------------------------------
-%	TITLE
-%----------------------------------------------------------------------------------------
+\begin{center}
+    {\Huge \scshape Reagan Vu} \\ \vspace{1pt}
+    \small \raisebox{-0.1\height}\faPhone\ 425-306-6200 ~ \href{mailto:x@gmail.com}{\raisebox{-0.2\height}\faEnvelope\  \underline{reaganvu29@gmail.com}} ~ 
+    \href{https://www.linkedin.com/in/reagan-vu-66a922173/}{\raisebox{-0.2\height}\faLinkedin\ \underline{Reagan Vu}}  ~
+    \href{https://github.com/ReaganVu29}{\raisebox{-0.2\height}\faGithub\ \underline{ReaganVu29}}
+    \vspace{-8pt}
+\end{center}
 
-% \begin{tabularx}{\linewidth}{ @{}X X@{} }
-% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
-% \raisebox{-0.05\height}\faGithub\ username \ | \
-% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
-% \end{tabularx}
 
-\begin{tabularx}{\linewidth}{@{} C @{}}
-\Huge{Reagan Vu} \\[7.5pt]
-\href{https://github.com/ReaganVu29}{\raisebox{-0.05\height}\faGithub\ ReaganVu29} \ $|$ \ 
-\href{https://www.linkedin.com/in/reagan-vu-66a922173/}{\raisebox{-0.05\height}\faLinkedin\ Reagan Vu} \ $|$ \ 
-\href{mailto:reaganvu29@gmail.com}{\raisebox{-0.05\height}\faEnvelope \ reaganvu29@gmail.com} \ $|$ \ 
-\href{tel:+425-306-6200}{\raisebox{-0.05\height}\faMobile \ +425-306-6200} \\
-\end{tabularx}
-
-%----------------------------------------------------------------------------------------
-%	EDUCATION
-%----------------------------------------------------------------------------------------
+%-----------EDUCATION-----------
 \section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of Washington}{Sep 2021 -- Present}
+      {Bachelor of Science in Computer Science and Software Engineering}{Bothell, WA}
+    \resumeSubheading
+      {Highline Community College}{Sep 2019 -- Jun 2021}
+      {}{Des Moines, WA}
+  \resumeSubHeadingListEnd
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{University of Washington} & \hfill Sept 2021 - Present \\[3.75pt]
-\multicolumn{1}{@{}X@{}}{Undergraduate in Computer Science and Software Engineering} & {\small Bothell, WA}  \\
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{Highline Community College} & \hfill Sept 2019 - June 2021 \\[3.75pt]
-\multicolumn{1}{@{}X@{}}{} & {\small Des Moines, WA} \vspace{-8pt} \\
-\end{tabularx}
-
-%----------------------------------------------------------------------------------------
-% EXPERIENCE SECTIONS
-%----------------------------------------------------------------------------------------
-
-%Projects
+%-----------PROJECTS-----------
 \section{Projects}
+    \vspace{-5pt}
+    \resumeSubHeadingListStart
+      \resumeProjectHeading
+        {\textbf{\href{https://github.com/Mistralton/Package-Tracker}{Package Tracker}} - Transport Hacks $|$ \emph{TypeScript, Next.js, Tailwind, Mapbox, Firebase, Auth0}}{Feb 2023}
+          \resumeItemListStart
+            \resumeItem{Managed a team of three in making a full-stack web application for TransportHacks hosted by Major League Hacking, winning best overall project}
+            \resumeItem{Researched viable shipping companies and their respective tracking APIs to determine feasibility of integration with backend data layer}
+            \resumeItem{Designed and oversaw audiovisual components of project including formal documentation, website presentation, and script writing}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/Mistralton/Replayed}{Replayed}} - Bay Area Hacks $|$ \emph{TypeScript, SvelteKit, Tailwind, Chart.js, Supabase}}{Feb 2023}
+          \resumeItemListStart
+            \resumeItem{Collaborated with group of three to make a full-stack web application incorporating quiz, game, and social aspects with real time comment system}
+            \resumeItem{Streamlined website development process by creating prototype for project design using Figma and Excalidraw, implementing UI and UX principles}
+            \resumeItem{Aided in development of PostgreSQL Supabase database schema as well as injecting initial entries to scaffold data architecture}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/Mistralton/procrabstinator-website}{Procrabstinator}} - Treasure Hacks $|$ \emph{Astro, Tauri, Next.js, React, Rust, SQLite}}{Jan 2023}
+          \resumeItemListStart
+            \resumeItem{Participated with group of three to produce a desktop application that helps users stop procrastinating through encouragement of good habits}
+            \resumeItem{Devised and implemented project schema for SQLite database to structure upcoming tasks and distracting applications}
+            \resumeItem{Designed and oversaw development of video and graphical assets, including presentation and logo, as well as writing documentation}
+          \resumeItemListEnd
+          \vspace{-13pt}
+      \resumeProjectHeading
+          {\textbf{\href{https://github.com/AWin23/Ecology-Keystone-Network}{Ecology Keystone Network}} - DubHacks $|$ \emph{HTML, JavaScript, Mapbox}}{Nov 2022}
+          \resumeItemListStart
+            \resumeItem{Cooperated with four people to develop a web app allowing users to visualize and comprehend the scale of ongoing global ecological calamities}
+            \resumeItem{Served vital role in researching and designing project elements, allowing group to comfortably reach minimum viable product in time constrained environment}
+            \resumeItem{Planned and coordinated group stand-ups in a time pressed environment to ensure effective development workflow and communication}
+          \resumeItemListEnd 
+          \vspace{-13pt}
+    \resumeSubHeadingListEnd
+\vspace{-8pt}
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\href{https://github.com/Mistralton/procrabstinator}{\textbf{Procrabstinator}} - Tauri, Next.js, React, Rust, SQLite, Astro & \hfill Treasure Hacks 2023 \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{
-\begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
-        \item[$\bullet$] Collaborated in group of three to produce a desktop application that helps users stop procrastinating through encouragement of good habits
-        \item[$\bullet$] Devised and implemented project schema for SQLite database to structure upcoming tasks and distracting applications
-        \item[$\bullet$] Designed and oversaw development of video and graphical assets, including presentation and logo, as well as writing documentation
-    \end{itemize}
-    \end{minipage}
-}
-\end{tabularx}
+%
+%-----------PROGRAMMING SKILLS-----------
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages}{: C++, Java, Python, SQL, HTML} \\
+     \textbf{Frameworks}{: Markdown, Java Swing} \\
+     \textbf{Tools}{: SQLite, Adobe Premier, GIMP, Git, Figma} \\
+    }}
+ \end{itemize}
+ \vspace{-16pt}
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\href{https://ecologykeystonenetwork.netlify.app/}{\textbf{Ecology Keystone Network}} - JavaScript, Mapbox & \hfill DubHacks 2022 \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{
-\begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
-        \item[$\bullet$] Cooperated with four people to develop a web app allowing users to visualize and comprehend the scale of ongoing global ecological calamities 
-        \item[$\bullet$] Served vital role in researching and designing project elements, allowing group to comfortably reach minimum viable product
-        \item[$\bullet$] Planned and coordinated group stand-ups in a time pressed environment to ensure effective development workflow and communication
-    \end{itemize}
-    \end{minipage}
-}
-\end{tabularx}
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\href{https://github.com/ReaganVu29/pokemon-edhesive}{\textbf{Pokemon Edhesive}} - RPG Maker XP & \hfill Spring 2017 \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{
-\begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
-        \item[$\bullet$] Formulated game mechanics and algorithms to create feature complete fan Pokemon game consisting of eight gyms and Pokemon league
-        \item[$\bullet$] Compiled and edited audio and graphical assets to usable state for consumption by game engine
-    \end{itemize}
-    \end{minipage}
-}
-\end{tabularx}
+    \resumeSubheading
+      {SEIU 775 benefits Group}{Nov 2020 -- Mar 2021}
+      {Individual Provider}{Renton, WA}
+      \resumeItemListStart
+        \resumeItem{Provided day-to-day care for patients with disabilities}
+        \resumeItem{Documented medical history of medical care for serviced patients}
+      \resumeItemListEnd
 
-%----------------------------------------------------------------------------------------
-%	SKILLS
-%----------------------------------------------------------------------------------------
-\section{Skills}
-\begin{tabularx}{\linewidth}{@{}l X@{}}
-Languages &  \normalsize{C++, Java, Python, SQL, HTML} \vspace{3pt} \\
-Frameworks &  \normalsize{Markdown, Java Swing} \vspace{3pt} \\
-Tools &  \normalsize{SQLite, Adobe Premier, GIMP, Git} \\
-\end{tabularx}
+    \resumeSubheading
+      {Newport Hills Swim and Tennis Club}{Jun 2019 -- Sep 2019}
+      {Lifeguard}{Bellevue, WA}
+      \resumeItemListStart
+        \resumeItem{Collaborated with a team in high pressure situations to ensure patron safety}
+        \resumeItem{Maintained gym equipment and ensured pool chemical levels met OSHA standards}
+    \resumeItemListEnd
 
-%Experience
-\section{Work Experience}
-
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{SEIU 775 Benefits Group} & \hfill Nov 2020 - Mar 2021 \\[3.75pt]
-\multicolumn{1}{@{}X@{}}{Individual Provider} & {\small Renton, WA} \vspace{3pt} \\
-\multicolumn{2}{@{}X@{}}{
-\begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt]
-        \item[$\bullet$] Provided day-to-day care for patients with disabilities
-        \item[$\bullet$] Documented medical history of medical care for serviced patients
-    \end{itemize}
-    \end{minipage}
-}
-\end{tabularx}
-
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{Newport Hills Swim and Tennis Club} & \hfill Jun 2019 - Sept 2019 \\[3.75pt]
-\multicolumn{1}{@{}X@{}}{Lifeguard} & {\small Bellevue, WA}  \\
-\end{tabularx}
-
-\vfill
-\center{\footnotesize Last updated: \today}
-
+    \resumeSubheading
+      {Kumon Institute of Education}{Jan 2019 -- Jun 2019}
+      {Academic Tutor}{Renton, WA}
+      \resumeItemListStart
+        \resumeItem{Managed and facilitated the learning sessions for kids spanning from elementary to middle school level}
+    \resumeItemListEnd
+    
+  \resumeSubHeadingListEnd
+\vspace{-16pt}
+ 
 \end{document}
